@@ -18,7 +18,7 @@ class ConfirmCloseTicketView(discord.ui.View):
         self.bot = bot
         self.channel = channel
 
-        self.add_item(discord.ui.Button(label="Close", style=discord.ButtonStyle.danger, emoji="❌", custom_id="close_ticket_confirm"))
+        self.add_item(discord.ui.Button(label="Yes", style=discord.ButtonStyle.danger, emoji="❌", custom_id="close_ticket_confirm"))
         self.add_item(discord.ui.Button(label="Cancel", style=discord.ButtonStyle.secondary, custom_id="close_ticket_cancel"))
 
 class TicketControlView(discord.ui.View):

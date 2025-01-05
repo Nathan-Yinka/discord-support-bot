@@ -2,6 +2,7 @@ import asyncio
 import discord
 from discord.ext import commands
 from discord import app_commands
+import re
 
 from config import TICKET_CATEGORY_NAME,CLOSED_CATEGORY_NAME,SUPPORT_ROLE_NAME,TEXT_CATEGORY_NAME,OPEN_TICKET_CHANNEL_NAME,TRANSCRIPT_CATEGORY_NAME
 from views.ticket_controls import TicketControlView,CloseTicketView,ConfirmCloseTicketView
@@ -54,8 +55,8 @@ class TicketBot(commands.Cog):
             member: discord.PermissionOverwrite(view_channel=True, send_messages=True,read_message_history=True),
             support_role: discord.PermissionOverwrite(view_channel=True, send_messages=True,read_message_history=True),
         }
-
-        channel_name = f"ticket-{formatted_number}"
+        sanitized_member_name = re.sub(r'[^a-zA-Z0-9_-]', '', member.name.lower())
+        channel_name = f"ticket-{formatted_number}-{sanitized_member_name}"
         channel = await guild.create_text_channel(
             channel_name,
             category=ticket_category,
