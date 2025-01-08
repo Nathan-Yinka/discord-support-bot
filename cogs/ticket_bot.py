@@ -253,18 +253,18 @@ class TicketBot(commands.Cog):
         )
 
         embed = discord.Embed(
-            title="Support Ticket",
-            description="To create a ticket react with 📩",
+            title="Open a Ticket",
+            description="Click 📩 button below to report an issue and receive support from our support team",
             color=0x00ff00  # Green color
         )
-        embed.set_thumbnail(url="https://www.clipartmax.com/png/middle/303-3035057_customer-service-executive-team-placeholder.png")  
+        # embed.set_thumbnail(url="https://www.clipartmax.com/png/middle/303-3035057_customer-service-executive-team-placeholder.png")  
         # embed.set_footer(text="TicketTool.xyz - Ticketing without clutter")
 
         view = discord.ui.View()
         view.add_item(
         discord.ui.Button(
-            label="📩 Create Ticket",
-            style=discord.ButtonStyle.secondary,  # Gray color
+            label="📩Open a Ticket",
+            style=discord.ButtonStyle.blurple,  # Gray color
             custom_id=f"create_ticket_{member.id}"  # Unique ID for the user
         )
     )
