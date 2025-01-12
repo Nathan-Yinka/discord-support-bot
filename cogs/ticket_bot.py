@@ -46,7 +46,7 @@ class TicketBot(commands.Cog):
         ticket_numbers = []
         for channel in all_ticket_channels:
             try:
-                number = int(channel.name.split("-")[-1])
+                number = int(channel.name.split("-")[1])
                 ticket_numbers.append(number)
             except ValueError:
                 continue 
