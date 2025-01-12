@@ -31,7 +31,12 @@ class TicketBot(commands.Cog):
         ticket_category, closed_category = await self.ensure_categories_exist(guild)
         support_role = discord.utils.get(guild.roles, name=SUPPORT_ROLE_NAME)
         if not support_role:
-            raise ValueError(f"The role '{SUPPORT_ROLE_NAME}' was not found in the guild!")
+            support_role = await guild.create_role(
+            name=SUPPORT_ROLE_NAME,
+            permissions=discord.Permissions(permissions=0), 
+            reason="Support role required for ticket management"
+        )
+        print(f"Created support role: {SUPPORT_ROLE_NAME}")
 
         all_ticket_channels = [
             channel for channel in guild.channels
