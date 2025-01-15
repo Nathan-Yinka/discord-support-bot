@@ -263,7 +263,7 @@ class TicketBot(commands.Cog):
             color=0x00ff00  # Green color
         )
         secondary_embed = discord.Embed(
-            description=f"{member.mention} **KINDLY LOOK ABOVE AND CLICK THE OPEN TICKET BUTTON TO GET HELP FROM ADMIN.**",
+            description=f"{member.mention} KINDLY LOOK ABOVE AND CLICK THE OPEN TICKET BUTTON TO GET HELP FROM ADMIN",
             color=0xFF4500,  # Orange color for emphasis
         )
         # embed.set_thumbnail(url="https://www.clipartmax.com/png/middle/303-3035057_customer-service-executive-team-placeholder.png")  
@@ -279,7 +279,7 @@ class TicketBot(commands.Cog):
     )
 
         await open_tickets_channel.send(
-            content=f"Welcome <@{member.mention}>! Please use the button below to create a ticket.",
+            content=f"Welcome {member.mention}! Please use the button below to create a ticket.",
             embed=embed,
             view=view,
         )
