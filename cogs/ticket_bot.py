@@ -277,6 +277,13 @@ class TicketBot(commands.Cog):
             custom_id=f"create_ticket_{member.id}"  # Unique ID for the user
         )
     )
+        
+        await open_tickets_channel.set_permissions(
+            member,
+            read_message_history=True,
+            view_channel=True, 
+            send_messages=False, 
+        )
 
         await open_tickets_channel.send(
             content=f"Welcome {member.mention}! Please use the button below to create a ticket.",
@@ -287,10 +294,12 @@ class TicketBot(commands.Cog):
         # Send the secondary embed
         secondary_message = await open_tickets_channel.send(embed=secondary_embed)
 
-        # await open_tickets_channel.set_permissions(
-        #     member,
-        #     read_message_history=False
-        # )
+        await open_tickets_channel.set_permissions(
+            member,
+            read_message_history=False,
+            view_channel=True, 
+            send_messages=False, 
+        )
 
         await asyncio.sleep(60)
         await secondary_message.delete()
