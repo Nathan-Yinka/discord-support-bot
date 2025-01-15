@@ -54,7 +54,7 @@ async def main():
                     guild.me: discord.PermissionOverwrite(read_messages=True)
                 }
                 channel = await category.create_text_channel(OPEN_TICKET_CHANNEL_NAME,overwrites=overwrites)
-                print(f"Created channel '{channel.name}' under category '{category.name}' in {guild.name}")
+                # print(f"Created channel '{channel.name}' under category '{category.name}' in {guild.name}")
 
         except Exception as e:
             print(f"Failed to create channel in {guild.name}: {e}")

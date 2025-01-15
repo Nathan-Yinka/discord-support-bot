@@ -262,6 +262,10 @@ class TicketBot(commands.Cog):
             description="Click 📩 button below to report an issue and receive support from our support team",
             color=0x00ff00  # Green color
         )
+        secondary_embed = discord.Embed(
+            description=f"{member.mention} **KINDLY LOOK ABOVE AND CLICK THE OPEN TICKET BUTTON TO GET HELP FROM ADMIN.**",
+            color=0xFF4500,  # Orange color for emphasis
+        )
         # embed.set_thumbnail(url="https://www.clipartmax.com/png/middle/303-3035057_customer-service-executive-team-placeholder.png")  
         # embed.set_footer(text="TicketTool.xyz - Ticketing without clutter")
 
@@ -275,15 +279,21 @@ class TicketBot(commands.Cog):
     )
 
         await open_tickets_channel.send(
-            content=f"Welcome <@{member.id}>! Please use the button below to create a ticket.",
+            content=f"Welcome <@{member.mention}>! Please use the button below to create a ticket.",
             embed=embed,
             view=view,
         )
+
+        # Send the secondary embed
+        secondary_message = await open_tickets_channel.send(embed=secondary_embed)
 
         await open_tickets_channel.set_permissions(
             member,
             read_message_history=True
         )
+
+        await asyncio.sleep(60)
+        await secondary_message.delete()
 
         # Log the event
         print(f"Sent a personalized message to {member.name} in '{OPEN_TICKET_CHANNEL_NAME}' channel.")
