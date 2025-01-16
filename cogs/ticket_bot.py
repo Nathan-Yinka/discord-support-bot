@@ -296,7 +296,7 @@ class TicketBot(commands.Cog):
 
         await open_tickets_channel.set_permissions(
             member,
-            read_message_history=False,
+            read_message_history=True,
             view_channel=True, 
             send_messages=False, 
         )
