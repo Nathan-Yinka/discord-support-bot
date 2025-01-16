@@ -285,7 +285,7 @@ class TicketBot(commands.Cog):
             send_messages=False, 
         )
 
-        await open_tickets_channel.send(
+        primary_message = await open_tickets_channel.send(
             content=f"Welcome {member.mention}! Please use the button below to create a ticket.",
             embed=embed,
             view=view,
@@ -303,6 +303,7 @@ class TicketBot(commands.Cog):
 
         await asyncio.sleep(60)
         await secondary_message.delete()
+        await primary_message.delete()
 
         # Log the event
         print(f"Sent a personalized message to {member.name} in '{OPEN_TICKET_CHANNEL_NAME}' channel.")
