@@ -248,23 +248,23 @@ class TicketBot(commands.Cog):
                 topic="This channel allows users to create support tickets.",
                 overwrites=overwrites
             )
-            print(f"Created '{OPEN_TICKET_CHANNEL_NAME}' channel under '{TEXT_CATEGORY_NAME}' category.")
+            print(f"Created channel under '{TEXT_CATEGORY_NAME}' category.")
 
         await open_tickets_channel.set_permissions(
             member,
             view_channel=True, 
             send_messages=False, 
-            read_message_history=False
+            read_message_history=True
         )
 
         embed = discord.Embed(
             title="Open a Ticket",
             description="Click 📩 button below to report an issue and receive support from our support team",
-            color=0x00ff00  # Green color
+            color=0x00ff00 
         )
         secondary_embed = discord.Embed(
             description=f"{member.mention} KINDLY LOOK ABOVE AND CLICK THE OPEN TICKET BUTTON TO GET HELP FROM ADMIN",
-            color=0xFF4500,  # Orange color for emphasis
+            color=0xFF4500, 
         )
         # embed.set_thumbnail(url="https://www.clipartmax.com/png/middle/303-3035057_customer-service-executive-team-placeholder.png")  
         # embed.set_footer(text="TicketTool.xyz - Ticketing without clutter")
@@ -278,13 +278,6 @@ class TicketBot(commands.Cog):
         )
     )
         
-        await open_tickets_channel.set_permissions(
-            member,
-            read_message_history=True,
-            view_channel=True, 
-            send_messages=False, 
-        )
-
         primary_message = await open_tickets_channel.send(
             content=f"Welcome {member.mention}! Please use the button below to create a ticket.",
             embed=embed,
@@ -294,16 +287,11 @@ class TicketBot(commands.Cog):
         # Send the secondary embed
         secondary_message = await open_tickets_channel.send(embed=secondary_embed)
 
-        await open_tickets_channel.set_permissions(
-            member,
-            read_message_history=True,
-            view_channel=True, 
-            send_messages=False, 
-        )
-
         await asyncio.sleep(60)
-        await secondary_message.delete()
-        await primary_message.delete()
+        if secondary_message:
+            await secondary_message.delete()
+        if primary_message:
+            await primary_message.delete()
 
         # Log the event
         print(f"Sent a personalized message to {member.name} in '{OPEN_TICKET_CHANNEL_NAME}' channel.")
